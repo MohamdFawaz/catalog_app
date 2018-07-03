@@ -1,0 +1,76 @@
+{% extends "main.html" %}
+{% block content %}
+	<!-- <div class="row top-menu">
+		<div class="col-md-10"></div>
+		<div class="col-md-2 text-right">
+			<a href="{{url_for('showAllCategory')}}">Click Here to Log in </a>
+		</div>
+	</div> -->
+	<div class="row divider white">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+
+		<div class="col-md-2 padding-none">
+			<a href="{{url_for('showAllCategory')}}"><h1>Catalog App</h1></a>
+			
+		</div>
+		<div class="row">
+	  		 <div class="col-sm-8 padding-top">
+				<div class="text-right">
+					{% if not login_session.username %}
+					<a href="{{url_for('showLogin')}}" class="btn btn-small success">Log in </a>
+					{% else %}
+					<a href="{{url_for('disconnect')}}" class="btn btn-small success">Logout </a>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+
+	
+	<!--<div class="row ">
+		<!-- <div class="col-md-1"></div> -->
+		<!-- <div class="col-md-10 padding-none">
+			
+		</div> -->
+		<!-- <div class="col-md-1"></div> 
+	</div>-->
+	<div class="row container vertical-center">
+  <div class="col-md-10">
+    <!--panel-->
+    <div class="panel panel-default col-md-12 ">
+     <div class="panel-body">
+        <div class="row col-md-12">
+        	<h1 class="box-header">{{item.item_title.title()}}</h1>
+        	<p>{{item.item_description}}</p>
+			{% if login_session.username %}
+			<a href="{{url_for('editItem', name = item.item_title)}}">Edit</a>|<a href="{{url_for('deleteItem',name = item.item_title)}}">Delete Item</a>
+	     	{% endif %}
+		</div> 
+     </div>
+    </div>
+  </div>
+</div>
+	
+
+
+{% endblock %}
